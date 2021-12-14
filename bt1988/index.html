@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-mail Editor</title>
+    <style>
+        html{
+            background-color: rgb(255, 255, 240);
+        }
+
+        .help-desk.open{
+            display: block;
+        }
+
+        .content{
+            background-color: rgb(255, 255, 240);
+            position: relative;
+            height: 600px;
+            width: 100%;
+        }
+
+        .textarea{
+            margin-left: 20%;
+            margin-top: 5%;
+            margin-right: 20%;
+            display: flex;
+        }
+
+        .email-input{
+            border: 1px #000 solid;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 400px;
+            background-color: #ddffee;
+        }
+
+        h2{
+            text-align: center;
+        }
+
+        .form-row{
+            padding: 8px 0;
+            display: flex;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .form-input{
+            flex:1;
+        }
+
+        .form-label{
+            min-width: 90px;
+        }
+
+        .submit-btn{
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .send-btn a{
+            text-decoration: none;
+        }
+
+        .send-btn{
+            width: 70px;
+            height: 26px;
+        }
+
+        .help-form{
+            margin-left: 50px;
+            margin-top: 50px;
+            
+        }
+        .help-btn{
+            width: 70px;
+            height: 45px;
+            font-size: large;
+            background-color: #ddffee;
+            border: 2px #e4e7e7 solid;
+        }
+
+        .help-btn:hover{
+            background-color: aqua;
+        }
+
+        .help-desk{
+            position: fixed;
+            background-color: #cfc;
+            width: 555px;
+            height: 373px;
+            margin-top: -600px;
+            margin-left: 19%;
+            border: 2px #e4e7e7 solid;
+            display: none;
+        }
+
+        .help-content{
+            margin: 0 8px;
+        }
+
+        .help-close{
+            text-align: right;
+            margin-right: 30px;
+            margin-top: 40px;
+        }
+
+        .help-close-btn{
+            width: 77px;
+            height: 30px;
+            border: none;
+            background-color: #cfc;
+            font-size: medium;
+            color: rgb(55, 44, 156);
+        }
+
+        .help-close-btn:hover{
+            text-decoration: underline;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="textarea">
+            <div class="email-input">
+                <h2>
+                    Compose e-mail message.
+                </h2>
+                <form action="" class="form">
+                    <div class="form-row">
+                        <label for="to-email-id" class="form-label">To:</label>
+                        <input required type="email" class="form-input" id="to-email-id" name="to-email">
+                    </div>
+    
+                    <div class="form-row">
+                        <label for="from-email-id" class="form-label">From:</label>
+                        <input required type="email" class="form-input" id="from-email-id" name="from-email">
+                    </div>
+    
+                    <div class="form-row">
+                        <label for="cc-id" class="form-label">Cc:</label>
+                        <input required type="text" class="form-input" id="cc-id" name="cc"> 
+                    </div>
+    
+                    <div class="form-row">
+                        <label for="subject-id" class="form-label">Subject:</label>
+                        <input required type="text" class="form-input" id="subject-id" name="subject">
+                    </div>
+    
+                    <div class="form-row">
+                        <label for="message-id" class="form-label">Message:</label>
+                        <textarea required name="messeage" id="message-id" cols="60" rows="5"></textarea>
+                    </div>
+    
+                    <div class="submit-btn">
+                        <button class="send-btn js-send" type="submit">Send</button> 
+                        <button class="send-btn" type="reset">Cancel</button>
+                    </div>
+                </form>
+            </div>
+            <div class="help-form">
+                <button class="help-btn js-help">Help</button>
+            </div>      
+        </div>
+    </div>
+    <div class="help-desk">
+        <h2>-: E-mail Editor Help :-</h2>
+        <div class="help-content">
+            <div>
+                    <span class="item">&#8680;</span>
+                    <b>To and Cc:</b><br>
+                    <b>To</b> and <b>Cc</b> boxes allow you to enter the e-mail addresses of the
+                    recepients to whom to message has to be sent. Recipients will be able to see
+                    who else was sent message by looking at the contents of the <b>To</b> and <b>Cc</b> boxes.
+            </div>
+            <div>
+                    <span class="item">&#8680;</span>
+                    <b>Subject:</b><br>
+                    The <b>Subject</b> box allows you to enter meaningful summary of the message.
+            </div>
+            <div>
+                    <span class="item">&#8680;</span>
+                    <b>Message:</b><br>
+                    The <b>Message</b> TextArea allows you to enter the text of your message.
+            </div>
+        </div>
+        <div class="help-close js-close">
+            <button class="help-close-btn">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const helpBtn = document.querySelector('.js-help')
+        const helpDesk = document.querySelector('.help-desk')
+        const closeBtn = document.querySelector('.js-close')
+        const sendBtn = document.querySelector('.js-send')
+
+        function showHelp(){
+            helpDesk.classList.add('open')
+        }
+
+        function hideHelp(){
+            helpDesk.classList.remove('open')
+        }
+
+        function showSend(){
+            alert("Your message has been successfully sent.")
+        }
+
+        helpBtn.addEventListener('click', showHelp)
+
+        closeBtn.addEventListener('click', hideHelp)
+
+        sendBtn.addEventListener('click', showSend)
+
+    </script>
+</body>
+</html>
